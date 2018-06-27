@@ -80,30 +80,6 @@ For **Xcode 9:**
 
 2. Configure where the SDK should send data to by building the configuration with appropriate URL and headers. Supply the configuration to the `initialize` method. Ensure that the initialize method is invoked in the `application:didFinishLaunchingWithOptions:` method in your `UIApplicationDelegate`
 
-#### For example, to send data to SafeGraph:
-
-Assuming you have a UUID and token from SafeGraph:
-
-```swift
-import openlocate
-
-func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]? ) -> Bool {
-
-    let uuid = UUID(uuidString: "<YOUR_UUID>")!
-    let token = "YOUR_TOKEN"
-    
-    let url = URL(string: "https://api.safegraph.com/v1/provider/\(uuid)/devicelocation")!
-    let headers = ["Authorization": "Bearer \(token)"]
-    
-    let configuration = Configuration(url: url, headers: headers, authorizationStatus: .authorizedAlways)
-    
-    do {
-        try OpenLocate.shared.initialize(with: configuration)
-    } catch {
-        print(error)
-    }
-}
-```
 
 #### Configuring multiple endpoints
 
@@ -131,7 +107,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 
 #### Configuring for "When In Use" location authorization
 
-By default, open locate will use and prompt the `.authorizedAlways` authorization status for `CLLocationManager`. If you prefer to use the `.authroizedWhenInUse` status, you can specify this before calling  `initialize`. Note that you will receive significantly less location updates when compared to the default. Example:
+By default, OpenLocate will use and prompt the `.authorizedAlways` authorization status for `CLLocationManager`. If you prefer to use the `.authroizedWhenInUse` status, you can specify this before calling  `initialize`. Note that you will receive significantly less location updates when compared to the default. Example:
 
 ```swift
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]? ) -> Bool {
@@ -139,7 +115,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
     let uuid = UUID(uuidString: "<YOUR_UUID>")!
     let token = "YOUR_TOKEN"
 
-    let url = URL(string: "https://api.safegraph.com/v1/provider/\(uuid)/devicelocation")!
+    let url = URL(string: "https://your_endpoint_here.com")!
     let headers = ["Authorization": "Bearer \(token)"]
 
     let configuration = Configuration(url: url, headers: headers, authorizationStatus: .authorizedWhenInUse)
@@ -259,50 +235,6 @@ func fetchNearbyPlaces(location: OpenLocateLocation, completion: @escaping Googl
 
 ```
 
-#### For example, to query Safegraph Places API using location:
-
-SafeGraph Places API: https://partners.safegraph.com/places
-
-```swift
-
-func fetchNearbyPlaces(location: OpenLocateLocation, completion: @escaping SafePlacesCompletionHandler) {
-        guard let coordinates = location.locationFields.coordinates else {
-            completion(nil, SafeGraphError.locationNotFound)
-            return
-        }
-
-        let queryParams = [
-            "advertising_id": location.advertisingInfo.advertisingId,
-            "advertising_id_type": "aaid",
-            "latitude": coordinates.latitude,
-            "longitude": coordinates.longitude,
-            "horizontal_accuracy": location.locationFields.horizontalAccuracy
-            ] as [String : Any]
-
-        Alamofire.request(
-            "https://api.safegraph.com/places/v1/nearby",
-            parameters: queryParams,
-            headers: ["Authorization": "Bearer <YOUR_TOKEN>"]
-        )
-            .responseJSON { response in
-                debugPrint(response)
-                guard let json = response.result.value as? [String: Any],
-                    let placesJson = json["places"] as? [Any], !placesJson.isEmpty else {
-                    completion(nil, SafeGraphError.placesNotFound)
-                    return
-                }
-
-                var places = [SafeGraphPlace]()
-                for placeJson in placesJson {
-                    let place = (placeJson as? [String: Any])!
-                    places.append(SafeGraphPlace(json: place))
-                }
-
-                completion(places, nil)
-        }
-    }
-
-```
 
 Similarly, OpenLocate SDK can be used to query additional APIs such as Facebook Places Graph or any other 3rd party places API.
 
