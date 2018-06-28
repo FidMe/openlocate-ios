@@ -80,6 +80,24 @@ For **Xcode 9:**
 
 2. Configure where the SDK should send data to by building the configuration with appropriate URL and headers. Supply the configuration to the `initialize` method. Ensure that the initialize method is invoked in the `application:didFinishLaunchingWithOptions:` method in your `UIApplicationDelegate`
 
+```swift
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]? ) -> Bool {
+
+    let uuid = UUID(uuidString: "<YOUR_UUID>")!
+    let token = "YOUR_TOKEN"
+
+    let url = URL(string: "https://your_endpoint_here.com")!
+    let headers = ["Authorization": "Bearer \(token)"]
+
+    let configuration = Configuration(url: url, headers: headers)
+
+    do {
+        try OpenLocate.shared.initialize(with: configuration)
+    } catch {
+        print(error)
+    }
+}
+```
 
 #### Configuring multiple endpoints
 
