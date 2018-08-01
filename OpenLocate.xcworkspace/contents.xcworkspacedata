@@ -2,16 +2,10 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:OpenLocate.playground">
-   </FileRef>
-   <FileRef
       location = "group:OpenLocate.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Example/iOS Example.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Example-ObjC/iOS Example Obj-C.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
