@@ -62,6 +62,7 @@ public struct OpenLocateLocation: JsonParameterType, DataType {
         static let isCharging = "is_charging"
         static let deviceModel = "device_model"
         static let osVersion = "os_version"
+        static let locationPermission = "location_permission"
     }
 
     public enum Context: String {
@@ -138,11 +139,11 @@ extension OpenLocateLocation {
         if let horizontalAccuracy = locationFields.horizontalAccuracy {
             jsonParameters[Keys.horizontalAccuracy] = horizontalAccuracy
         }
-        
+
         if let altitude = locationFields.altitude {
             jsonParameters[Keys.altitude] = altitude
         }
-        
+
         if let verticalAccuracy = locationFields.verticalAccuracy {
             jsonParameters[Keys.verticalAccuracy] = verticalAccuracy
         }
@@ -179,6 +180,10 @@ extension OpenLocateLocation {
             jsonParameters[Keys.osVersion] = osVersion
         }
 
+        if let locationPermission = deviceInfo.locationPermission {
+            jsonParameters[Keys.locationPermission] = locationPermission
+        }
+        
         return jsonParameters
     }
 }
@@ -219,7 +224,8 @@ extension OpenLocateLocation {
 
         self.deviceInfo = DeviceCollectingFields(isCharging: coding.isCharging,
                                                  deviceModel: coding.deviceModel,
-                                                 osVersion: coding.osVersion)
+                                                 osVersion: coding.osVersion,
+                                                 locationPermission: coding.locationPermission)
 
         if let contextString = coding.context, let context = Context(rawValue: contextString) {
             self.context = context
@@ -261,6 +267,7 @@ extension OpenLocateLocation {
         let isCharging: Bool?
         let deviceModel: String?
         let osVersion: String?
+        let locationPermission: String?
 
         init(_ location: OpenLocateLocation) {
             privateTimestamp = location.timestamp.timeIntervalSince1970
@@ -282,6 +289,7 @@ extension OpenLocateLocation {
             isCharging = location.deviceInfo.isCharging
             deviceModel = location.deviceInfo.deviceModel
             osVersion = location.deviceInfo.osVersion
+            locationPermission = location.deviceInfo.locationPermission
 
             super.init()
         }
@@ -304,6 +312,7 @@ extension OpenLocateLocation {
             isCharging = decoder.decodeObject(forKey: OpenLocateLocation.Keys.isCharging) as? Bool
             deviceModel = decoder.decodeObject(forKey: OpenLocateLocation.Keys.deviceModel) as? String
             osVersion = decoder.decodeObject(forKey: OpenLocateLocation.Keys.osVersion) as? String
+            locationPermission = decoder.decodeObject(forKey: OpenLocateLocation.Keys.locationPermission) as? String
             horizontalAccuracy
                 = decoder.decodeObject(forKey: OpenLocateLocation.Keys.horizontalAccuracy) as? CLLocationAccuracy
             verticalAccuracy
@@ -330,6 +339,7 @@ extension OpenLocateLocation {
             aCoder.encode(isCharging, forKey: OpenLocateLocation.Keys.isCharging)
             aCoder.encode(deviceModel, forKey: OpenLocateLocation.Keys.deviceModel)
             aCoder.encode(osVersion, forKey: OpenLocateLocation.Keys.osVersion)
+            aCoder.encode(locationPermission, forKey: OpenLocateLocation.Keys.locationPermission)
             aCoder.encode(horizontalAccuracy, forKey: OpenLocateLocation.Keys.horizontalAccuracy)
             aCoder.encode(verticalAccuracy, forKey: OpenLocateLocation.Keys.verticalAccuracy)
         }

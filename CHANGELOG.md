@@ -2,6 +2,13 @@
 
 `OpenLocate-iOS` adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.5.0](https://github.com/OpenLocate/openlocate-ios/tag/1.5.0)
+
+#### Added
+
+- Support for Objective-C apps.
+- The location authorization level granted by the user is now sent as part of the location payload.
+
 ## [1.4.1](https://github.com/OpenLocate/openlocate-ios/tag/1.4.1)
 
 #### Fixed

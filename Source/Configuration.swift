@@ -27,12 +27,15 @@ public typealias Headers = [String: String]
 // Configuration
 import CoreLocation
 
-public struct Configuration {
+@objc
+public final class Configuration: NSObject {
 
-    public struct Endpoint {
+    @objc
+    public final class Endpoint: NSObject {
         let url: URL
         let headers: Headers?
 
+        @objc
         public init(url: URL, headers: Headers?) {
             self.url = url
             self.headers = headers
@@ -44,8 +47,10 @@ public struct Configuration {
     let transmissionInterval: TimeInterval
     let authorizationStatus: CLAuthorizationStatus
 
+    @objc
     public static let defaultTransmissionInterval: TimeInterval = 6 * 60 * 60 // 6 Hours
 
+    @objc
     public init(endpoints: [Endpoint],
                 collectingFieldsConfiguration: CollectingFieldsConfiguration = .default,
                 transmissionInterval: TimeInterval = defaultTransmissionInterval,
@@ -56,11 +61,17 @@ public struct Configuration {
         self.transmissionInterval = transmissionInterval
         self.authorizationStatus = authorizationStatus
     }
+    
+    @objc
+    public convenience init(endpoints: [Endpoint]) {
+        self.init(endpoints: endpoints, authorizationStatus: .authorizedAlways)
+    }
 
-    public init(url: URL,
-                headers: Headers? = nil,
-                collectingFieldsConfiguration: CollectingFieldsConfiguration = .default,
-                authorizationStatus: CLAuthorizationStatus = .authorizedAlways) {
+    @objc
+    public convenience init(url: URL,
+                            headers: Headers? = nil,
+                            collectingFieldsConfiguration: CollectingFieldsConfiguration = .default,
+                            authorizationStatus: CLAuthorizationStatus = .authorizedAlways) {
 
         self.init(endpoints: [Endpoint(url: url, headers: headers)],
                   collectingFieldsConfiguration: collectingFieldsConfiguration,
