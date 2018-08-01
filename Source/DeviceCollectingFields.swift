@@ -54,8 +54,6 @@ public struct DeviceCollectingFields {
             return "restricted"
         case .denied:
             return "denied"
-        default:
-            return nil;
         }
     }
 }
