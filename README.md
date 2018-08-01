@@ -80,6 +80,7 @@ For **Xcode 9:**
 
 2. Configure where the SDK should send data to by building the configuration with appropriate URL and headers. Supply the configuration to the `initialize` method. Ensure that the initialize method is invoked in the `application:didFinishLaunchingWithOptions:` method in your `UIApplicationDelegate`
 
+##### Swift
 ```swift
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]? ) -> Bool {
 
@@ -96,6 +97,24 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
     } catch {
         print(error)
     }
+    
+    return true
+}
+```
+
+##### Objective-C
+```objc
+#import <OpenLocate/OpenLocate-Swift.h>
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    Endpoint *endpoint = [[Endpoint alloc] initWithUrl:[NSURL URLWithString:@"<YOUR_URL>"]
+                                               headers:@{@"Authorization": @"Bearer <YOUR_TOKEN"}];
+    
+    Configuration *config = [[Configuration alloc] initWithEndpoints:@[endpoint]];
+
+    [OpenLocate.shared initializeWith:config error:nil];
+
+    return YES;
 }
 ```
 
@@ -150,33 +169,59 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 
 To start the tracking location, call the `startTracking` method on the `OpenLocate`. Get the instance by calling `shared`.
 
+#### Swift
 ```swift
 OpenLocate.shared.startTracking()
 ```
 
+#### Objective-C
+```objc
+[OpenLocate.shared startTracking];
+```
 
 ### Stop tracking of location
 
 To stop the tracking call `stopTracking` method on the `OpenLocate`. Get the instance by calling `shared`.
 
+#### Swift
 ```swift
 OpenLocate.shared.stopTracking()
+```
+
+#### Objective-C
+```objc
+[OpenLocate.shared stopTracking];
 ```
 
 ### Check the current state of location tracking
 
 Call `isTrackingEnabled` method on the `OpenLocate`. Get the instance by calling `shared`.
 
+#### Swift
 ```swift
 OpenLocate.shared.isTrackingEnabled()
+```
+
+#### Objective-C
+```objc
+[OpenLocate.shared isTrackingEnabled];
 ```
 
 ### Configuring the location data transmission interval
 
 By default, the location data transmission interval is six hours. If you would like to change that. Simply pass a different value when constructing your `Configuration` object:
 
+#### Swift
 ```swift
 let configuration = Configuration(endpoints: [endpoint], transmissionInterval: 3 * 60.0 * 60.0) // 3 Hours
+```
+
+#### Objective-C
+```objc
+Configuration *config = [[Configuration alloc] initWithEndpoints:@[endpoint]
+                                   collectingFieldsConfiguration:[CollectingFieldsConfiguration default]
+                                            transmissionInterval:3 * 60.0 * 60.0 // 3 Hours
+                                             authorizationStatus:kCLAuthorizationStatusAuthorizedAlways];
 ```
 
 ### Additional location updates via Background Fetch
@@ -187,9 +232,18 @@ Ensure that `Background Fetch` mode is enabled in your project:
 
 Additionally, implement the following method in your `AppDelegate`
 
+#### Swift
 ```swift
 func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
      OpenLocate.shared.performFetchWithCompletionHandler(completionHandler)
+}
+```
+
+#### Objective-C
+```objc
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler
+{
+    [OpenLocate.shared performFetchWithCompletionHandler:completionHandler];
 }
 ```
 
@@ -313,6 +367,7 @@ func pushLocationToDataDrop(location: OpenLocateLocation) {
 |is_charging|Boolean|A boolean value to determine if the phone was charging when the location was determined|CollectingFieldsConfiguration.shouldLogDeviceCharging|
 |device_model|String|A string value representing the model of the device|CollectingFieldsConfiguration.shouldLogDeviceModel|
 |os_version|String|A String value representing the version of the operating system|CollectingFieldsConfiguration.shouldLogDeviceOsVersion|
+|location_permission|String|A String value representing the location permission accepted by the user|CollectingFieldsConfiguration.shouldLocationPermission|
 
 ### Sample Request Body
 

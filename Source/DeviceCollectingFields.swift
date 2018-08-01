@@ -24,19 +24,39 @@
 
 import Foundation
 import UIKit.UIDevice
+import CoreLocation
 
 public struct DeviceCollectingFields {
     public let isCharging: Bool?
     public let deviceModel: String?
     public let osVersion: String?
+    public let locationPermission: String?
 
     static func configure(with configuration: CollectingFieldsConfiguration) -> DeviceCollectingFields {
         let currentDevice = UIDevice.current
         let isCharging = configuration.shouldLogDeviceCharging ? currentDevice.isCharging : nil
         let deviceModel = configuration.shouldLogDeviceModel ? currentDevice.modelName : nil
         let osVersion = configuration.shouldLogDeviceOsVersion ? currentDevice.osVersion : nil
+        let locationPermission = configuration.shouldLogDeviceLocationPermission ? authorizationStatusString() : nil
 
-        return DeviceCollectingFields(isCharging: isCharging, deviceModel: deviceModel, osVersion: osVersion)
+        return DeviceCollectingFields(isCharging: isCharging, deviceModel: deviceModel, osVersion: osVersion, locationPermission: locationPermission)
+    }
+    
+    private static func authorizationStatusString() -> String? {
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedAlways:
+            return "authorized_always"
+        case .authorizedWhenInUse:
+            return "when_in_use"
+        case .notDetermined:
+            return "not_determined"
+        case .restricted:
+            return "restricted"
+        case .denied:
+            return "denied"
+        default:
+            return nil;
+        }
     }
 }
 

@@ -25,13 +25,17 @@
 import Foundation
 
 public extension CollectingFieldsConfiguration {
-    final public class Builder {
+    
+    @objc
+    final public class Builder: NSObject {
+        
         private var shouldLogNetworkInfo = true
         private var shouldLogDeviceCourse = true
         private var shouldLogDeviceSpeed = true
         private var shouldLogDeviceCharging = true
         private var shouldLogDeviceModel = true
         private var shouldLogDeviceOsVersion = true
+        private var shouldLogDeviceLocationPermission = true
         private var shouldLogLocation = true
         private var shouldLogTimestamp = true
         private var shouldLogHorizontalAccuracy = true
@@ -39,80 +43,100 @@ public extension CollectingFieldsConfiguration {
         private var shouldLogAltitude = true
         private var shouldLogAdId = true
 
-        public init() {}
+        public override init() {}
 
+        @objc
         public func set(shouldLogNetworkInfo: Bool) -> Builder {
             self.shouldLogNetworkInfo = shouldLogNetworkInfo
 
             return self
         }
 
+        @objc
         public func set(shouldLogDeviceCourse: Bool) -> Builder {
             self.shouldLogDeviceCourse = shouldLogDeviceCourse
 
             return self
         }
 
+        @objc
         public func set(shouldLogDeviceSpeed: Bool) -> Builder {
             self.shouldLogDeviceSpeed = shouldLogDeviceSpeed
 
             return self
         }
 
+        @objc
         public func set(shouldLogDeviceCharging: Bool) -> Builder {
             self.shouldLogDeviceCharging = shouldLogDeviceCharging
 
             return self
         }
 
+        @objc
         public func set(shouldLogDeviceModel: Bool) -> Builder {
             self.shouldLogDeviceModel = shouldLogDeviceModel
 
             return self
         }
 
+        @objc
         public func set(shouldLogDeviceOsVersion: Bool) -> Builder {
             self.shouldLogDeviceOsVersion = shouldLogDeviceOsVersion
 
             return self
         }
+        
+        @objc
+        public func set(shouldLogDeviceLocationPermission: Bool) -> Builder {
+            self.shouldLogDeviceLocationPermission = shouldLogDeviceLocationPermission
+            
+            return self
+        }
 
+        @objc
         public func set(shouldLogLocation: Bool) -> Builder {
             self.shouldLogLocation = shouldLogLocation
 
             return self
         }
 
+        @objc
         public func set(shouldLogTimestamp: Bool) -> Builder {
             self.shouldLogTimestamp = shouldLogTimestamp
 
             return self
         }
 
+        @objc
         public func set(shouldLogHorizontalAccuracy: Bool) -> Builder {
             self.shouldLogHorizontalAccuracy = shouldLogHorizontalAccuracy
 
             return self
         }
 
+        @objc
         public func set(shouldLogVerticalAccuracy: Bool) -> Builder {
             self.shouldLogVerticalAccuracy = shouldLogVerticalAccuracy
 
             return self
         }
 
+        @objc
         public func set(shouldLogAltitude: Bool) -> Builder {
             self.shouldLogAltitude = shouldLogAltitude
 
             return self
         }
 
+        @objc
         public func set(shouldLogIdType: Bool) -> Builder {
             self.shouldLogAdId = shouldLogIdType
 
             return self
         }
-
+        
+        @objc
         public func build() -> CollectingFieldsConfiguration {
             return CollectingFieldsConfiguration(shouldLogNetworkInfo: shouldLogNetworkInfo,
                                                  shouldLogDeviceCourse: shouldLogDeviceCourse,
@@ -120,6 +144,7 @@ public extension CollectingFieldsConfiguration {
                                                  shouldLogDeviceCharging: shouldLogDeviceCharging,
                                                  shouldLogDeviceModel: shouldLogDeviceModel,
                                                  shouldLogDeviceOsVersion: shouldLogDeviceOsVersion,
+                                                 shouldLogDeviceLocationPermission: shouldLogDeviceLocationPermission,
                                                  shouldLogLocation: shouldLogLocation,
                                                  shouldLogTimestamp: shouldLogTimestamp,
                                                  shouldLogHorizontalAccuracy: shouldLogHorizontalAccuracy,

@@ -23,51 +23,56 @@
 //
 
 /// Describes which data is sending from the device
-public struct CollectingFieldsConfiguration {
+@objc
+public final class CollectingFieldsConfiguration: NSObject {
     /// Determines whether network information is sending or not. Default value is true.
-    public let shouldLogNetworkInfo: Bool
+    @objc public let shouldLogNetworkInfo: Bool
 
     /// Determines whether device course (bearing) is sending or not. Default value is true.
-    public let shouldLogDeviceCourse: Bool
+    @objc public let shouldLogDeviceCourse: Bool
 
     /// Determines whether device speed is sending or not. Default value is true.
-    public let shouldLogDeviceSpeed: Bool
+    @objc public let shouldLogDeviceSpeed: Bool
 
     /// Determines whether device charging status should be sent ot not. Default value is true.
-    public let shouldLogDeviceCharging: Bool
+    @objc public let shouldLogDeviceCharging: Bool
 
     /// Determines whether device model should be sent. Default value is true.
-    public let shouldLogDeviceModel: Bool
+    @objc public let shouldLogDeviceModel: Bool
 
     /// Determines whether device's os version is sent. Default value is true.
-    public let shouldLogDeviceOsVersion: Bool
+    @objc public let shouldLogDeviceOsVersion: Bool
 
+    /// Determines whether device's location permission is sent. Default value is true.
+    @objc public let shouldLogDeviceLocationPermission: Bool
+    
     /// Determines whether device's location coordinates will be sent. Default value is true.
-    public let shouldLogLocation: Bool
+    @objc public let shouldLogLocation: Bool
 
     /// Determines whether timestamp of the recorded location in epoch will be sent. Default value is true.
-    public let shouldLogTimestamp: Bool
+    @objc public let shouldLogTimestamp: Bool
 
     /// Determines whether accuracy of the location will be sent. Default value is true.
-    public let shouldLogHorizontalAccuracy: Bool
+    @objc public let shouldLogHorizontalAccuracy: Bool
 
     /// Determines whether altitude accuracy will be sent. Default value is true.
-    public let shouldLogVerticalAccuracy: Bool
+    @objc public let shouldLogVerticalAccuracy: Bool
 
     /// Determines whether altitude will be sent. Default value is true.
-    public let shouldLogAltitude: Bool
+    @objc public let shouldLogAltitude: Bool
 
     /// Determines whether 'idfa' for identifying Apple device advertising type will be sent. Default value is true.
-    public let shouldLogAdId: Bool
+    @objc public let shouldLogAdId: Bool
 
     /// Default configuration. All parameters are set to true.
-    public static let `default` = CollectingFieldsConfiguration(
+    @objc public static let `default` = CollectingFieldsConfiguration(
         shouldLogNetworkInfo: true,
         shouldLogDeviceCourse: true,
         shouldLogDeviceSpeed: true,
         shouldLogDeviceCharging: true,
         shouldLogDeviceModel: true,
         shouldLogDeviceOsVersion: true,
+        shouldLogDeviceLocationPermission: true,
         shouldLogLocation: true,
         shouldLogTimestamp: true,
         shouldLogHorizontalAccuracy: true,
@@ -75,4 +80,34 @@ public struct CollectingFieldsConfiguration {
         shouldLogAltitude: true,
         shouldLogAdId: true
     )
+    
+    @objc
+    public init(shouldLogNetworkInfo: Bool,
+                shouldLogDeviceCourse: Bool,
+                shouldLogDeviceSpeed: Bool,
+                shouldLogDeviceCharging: Bool,
+                shouldLogDeviceModel: Bool,
+                shouldLogDeviceOsVersion: Bool,
+                shouldLogDeviceLocationPermission: Bool,
+                shouldLogLocation: Bool,
+                shouldLogTimestamp: Bool,
+                shouldLogHorizontalAccuracy: Bool,
+                shouldLogVerticalAccuracy: Bool,
+                shouldLogAltitude: Bool,
+                shouldLogAdId: Bool) {
+
+        self.shouldLogNetworkInfo = shouldLogNetworkInfo
+        self.shouldLogDeviceCourse = shouldLogDeviceCourse
+        self.shouldLogDeviceSpeed = shouldLogDeviceSpeed
+        self.shouldLogDeviceCharging = shouldLogDeviceCharging
+        self.shouldLogDeviceModel = shouldLogDeviceModel
+        self.shouldLogDeviceOsVersion = shouldLogDeviceOsVersion
+        self.shouldLogDeviceLocationPermission = shouldLogDeviceLocationPermission
+        self.shouldLogLocation = shouldLogLocation
+        self.shouldLogTimestamp = shouldLogTimestamp
+        self.shouldLogHorizontalAccuracy = shouldLogHorizontalAccuracy
+        self.shouldLogVerticalAccuracy = shouldLogVerticalAccuracy
+        self.shouldLogAltitude = shouldLogAltitude
+        self.shouldLogAdId = shouldLogAdId
+    }
 }

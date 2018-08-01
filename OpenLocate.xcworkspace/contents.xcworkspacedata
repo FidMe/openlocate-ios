@@ -11,6 +11,9 @@
       location = "group:Example/iOS Example.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:Example-ObjC/iOS Example Obj-C.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>
