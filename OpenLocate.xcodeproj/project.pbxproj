@@ -22,7 +22,6 @@
 		48C4D8C11F1F9D3F00640145 /* OpenLocateError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C4D8C01F1F9D3F00640145 /* OpenLocateError.swift */; };
 		48C4D8C31F1F9E1000640145 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48C4D8C21F1F9E1000640145 /* LocationManager.swift */; };
 		48D134671F0A3DAE0075EFBC /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D134661F0A3DAE0075EFBC /* Dictionary+Extensions.swift */; };
-		48D134691F0A56830075EFBC /* LocationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D134681F0A56830075EFBC /* LocationServiceTests.swift */; };
 		48D3AA6F1F1797EF00BC3992 /* LocationDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D3AA6E1F1797EF00BC3992 /* LocationDataSourceTests.swift */; };
 		48D6E7F81F38790D00EC76A8 /* Advertising.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D6E7F71F38790D00EC76A8 /* Advertising.swift */; };
 		48D6E7FC1F3AD07300EC76A8 /* DictionaryExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48D6E7FB1F3AD07300EC76A8 /* DictionaryExtensionTests.swift */; };
@@ -75,7 +74,6 @@
 		48C4D8C01F1F9D3F00640145 /* OpenLocateError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OpenLocateError.swift; path = Source/OpenLocateError.swift; sourceTree = "<group>"; };
 		48C4D8C21F1F9E1000640145 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LocationManager.swift; path = Source/LocationManager.swift; sourceTree = "<group>"; };
 		48D134661F0A3DAE0075EFBC /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Dictionary+Extensions.swift"; path = "Source/Dictionary+Extensions.swift"; sourceTree = "<group>"; };
-		48D134681F0A56830075EFBC /* LocationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServiceTests.swift; sourceTree = "<group>"; };
 		48D3AA6E1F1797EF00BC3992 /* LocationDataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataSourceTests.swift; sourceTree = "<group>"; };
 		48D6E7F71F38790D00EC76A8 /* Advertising.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Advertising.swift; path = Source/Advertising.swift; sourceTree = "<group>"; };
 		48D6E7FB1F3AD07300EC76A8 /* DictionaryExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryExtensionTests.swift; sourceTree = "<group>"; };
@@ -274,7 +272,6 @@
 			isa = PBXGroup;
 			children = (
 				48E45DF01F094506006EAF6F /* LocationTests.swift */,
-				48D134681F0A56830075EFBC /* LocationServiceTests.swift */,
 				48D3AA6E1F1797EF00BC3992 /* LocationDataSourceTests.swift */,
 			);
 			name = Core;
@@ -436,7 +433,6 @@
 				48D6E8031F3B124600EC76A8 /* HttpRequestTests.swift in Sources */,
 				48E45DF11F094506006EAF6F /* LocationTests.swift in Sources */,
 				48F0DCC71F3B3A89004C4943 /* HttpResponseTests.swift in Sources */,
-				48D134691F0A56830075EFBC /* LocationServiceTests.swift in Sources */,
 				48DBDB231F0A8A7D006D17EC /* OpenLocateTests.swift in Sources */,
 				48E45DE31F052A5F006EAF6F /* BaseTestCase.swift in Sources */,
 				48DE7F501F4030F4008BD4A4 /* URLSession.swift in Sources */,

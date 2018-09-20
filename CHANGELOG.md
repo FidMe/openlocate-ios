@@ -2,6 +2,12 @@
 
 `OpenLocate-iOS` adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.6.0](https://github.com/OpenLocate/openlocate-ios/tag/1.6.0)
+
+#### Added
+
+- Remove unnecessary location info.
+
 ## [1.5.0](https://github.com/OpenLocate/openlocate-ios/tag/1.5.0)
 
 #### Added

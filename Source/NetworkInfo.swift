@@ -23,30 +23,14 @@
 //
 
 import Foundation
-import SystemConfiguration.CaptiveNetwork
 import CoreTelephony
 
 public struct NetworkInfo {
 
-    var bssid: String?
-    var ssid: String?
     var carrierName: String?
 
     static func currentNetworkInfo() -> NetworkInfo {
         var networkInfo = NetworkInfo()
-        if let interface = CNCopySupportedInterfaces() {
-            for index in 0..<CFArrayGetCount(interface) {
-                let interfaceName: UnsafeRawPointer = CFArrayGetValueAtIndex(interface, index)
-                let rec = unsafeBitCast(interfaceName, to: AnyObject.self)
-                if let unsafeInterfaceData = CNCopyCurrentNetworkInfo("\(rec)" as CFString),
-                    let interfaceData = unsafeInterfaceData as? [String: AnyObject] {
-                    networkInfo.bssid = interfaceData["BSSID"] as? String
-                    networkInfo.ssid = interfaceData["SSID"] as? String
-                } else {
-                    // not connected wifi
-                }
-            }
-        }
         if let carrierName = CTTelephonyNetworkInfo().subscriberCellularProvider?.carrierName {
             networkInfo.carrierName = carrierName
         }

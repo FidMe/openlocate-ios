@@ -40,10 +40,11 @@ final class OpenLocateLocationTests: BaseTestCase {
         )
 
         let adInfo = AdvertisingInfo.Builder().set(advertisingId: "2345").set(isLimitedAdTrackingEnabled: true).build()
-        let networkInfo = NetworkInfo(bssid: "bssid_goes_here", ssid: "ssid_goes_here")
+        let networkInfo = NetworkInfo(carrierName: "ATT")
         let deviceInfo = DeviceCollectingFields(isCharging: false,
                                                 deviceModel: "iPhone 7 Plus",
-                                                osVersion: "iOS 11.0.1")
+                                                osVersion: "iOS 11.0.1",
+                                                locationPermission: "always")
 
         let info = CollectingFields.Builder(configuration: .default)
             .set(location: coreLocation)
@@ -67,8 +68,6 @@ final class OpenLocateLocationTests: BaseTestCase {
         XCTAssertEqual((json["ad_id"] as? String)!, "2345")
         XCTAssertEqual((json["ad_opt_out"] as? Bool)!, true)
         XCTAssertEqual((json["id_type"] as? String)!, "idfa")
-        XCTAssertEqual((json["wifi_bssid"] as? String)!, "bssid_goes_here")
-        XCTAssertEqual((json["wifi_ssid"] as? String)!, "ssid_goes_here")
         XCTAssertEqual((json["course"] as? Double)!, Double(exactly: 180.0))
         XCTAssertEqual((json["speed"] as? Double)!, Double(exactly: 20.0))
         XCTAssertEqual((json["is_charging"] as? Bool)!, false)

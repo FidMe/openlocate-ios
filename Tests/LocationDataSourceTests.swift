@@ -45,8 +45,8 @@ class LocationDataSourceTests: BaseTestCase {
             .set(advertisingId: "123")
             .build()
 
-        let networkInfo = NetworkInfo(bssid: "bssid_goes_here", ssid: "ssid_goes_here")
-        let deviceInfo = DeviceCollectingFields(isCharging: false, deviceModel: "iPhone9,4", osVersion: "iOS 11.0.1")
+        let networkInfo = NetworkInfo(carrierName: "ATT")
+        let deviceInfo = DeviceCollectingFields(isCharging: false, deviceModel: "iPhone9,4", osVersion: "iOS 11.0.1", locationPermission: "always")
 
         let info = CollectingFields.Builder(configuration: .default)
             .set(location: coreLocation)
@@ -171,8 +171,8 @@ class LocationListDataSource: BaseTestCase {
             .set(advertisingId: "123")
             .build()
 
-        let networkInfo = NetworkInfo(bssid: "bssid_goes_here", ssid: "ssid_goes_here")
-        let deviceInfo = DeviceCollectingFields(isCharging: false, deviceModel: "iPhone9,4", osVersion: "iOS 11.0.1")
+        let networkInfo = NetworkInfo(carrierName: "ATT")
+        let deviceInfo = DeviceCollectingFields(isCharging: false, deviceModel: "iPhone9,4", osVersion: "iOS 11.0.1", locationPermission: "always")
 
         let info = CollectingFields.Builder(configuration: .default)
             .set(location: coreLocation)
