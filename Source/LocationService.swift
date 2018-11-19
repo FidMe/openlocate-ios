@@ -163,17 +163,21 @@ extension LocationService {
     }
 
     func postLocationsIfNeeded() {
-        if let earliestLocation = locationDataSource.first(), let createdAt = earliestLocation.createdAt,
-            abs(createdAt.timeIntervalSinceNow) > self.transmissionInterval {
+//        if let earliestLocation = locationDataSource.first(), let createdAt = earliestLocation.createdAt,
+//            abs(createdAt.timeIntervalSinceNow) > self.transmissionInterval {
+//
+//            if let lastTransmissionDate = self.lastTransmissionDate,
+//                abs(lastTransmissionDate.timeIntervalSinceNow) < self.transmissionInterval / 2 {
+//                return
+//            }
 
-            if let lastTransmissionDate = self.lastTransmissionDate,
-                abs(lastTransmissionDate.timeIntervalSinceNow) < self.transmissionInterval / 2 {
-                return
-            }
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 4.0, execute: { [weak self] in
-                self?.postData()
-            })
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 4.0, execute: { [weak self] in
+//                self?.postData()
+//            })
+//        }
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.postData()
         }
     }
 
