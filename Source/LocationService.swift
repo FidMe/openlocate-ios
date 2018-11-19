@@ -106,7 +106,7 @@ final class LocationService: LocationServiceType {
         }
 
         UserDefaults.standard.set(true, forKey: isStartedKey)
-        UIApplication.shared.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
+        UIApplication.shared.setMinimumBackgroundFetchInterval(60)
 
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(applicationDidBecomeActive),
