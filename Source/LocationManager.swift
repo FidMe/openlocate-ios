@@ -58,7 +58,7 @@ final class LocationManager: NSObject, LocationManagerType, CLLocationManagerDel
         super.init()
 
         manager.delegate = self
-        manager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        manager.desiredAccuracy = kCLLocationAccuracyBest
 
         manager.distanceFilter = 35
         
