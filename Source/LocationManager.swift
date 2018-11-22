@@ -60,7 +60,8 @@ final class LocationManager: NSObject, LocationManagerType, CLLocationManagerDel
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
 
-        manager.distanceFilter = 35
+        manager.distanceFilter = kCLDistanceFilterNone
+        manager.activityType = .fitness
         
         if #available(iOS 9.0, *) {
             manager.allowsBackgroundLocationUpdates = true
