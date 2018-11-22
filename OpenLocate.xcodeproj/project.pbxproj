@@ -92,7 +92,7 @@
 		48E45DEE1F09384B006EAF6F /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Location.swift; path = Source/Location.swift; sourceTree = "<group>"; };
 		48E45DF01F094506006EAF6F /* LocationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTests.swift; sourceTree = "<group>"; };
 		48F0DCC61F3B3A89004C4943 /* HttpResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpResponseTests.swift; sourceTree = "<group>"; };
-		9511836721A6A4F40039F989 /* PushNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationManager.swift; sourceTree = "<group>"; };
+		9511836721A6A4F40039F989 /* PushNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PushNotificationManager.swift; path = Source/PushNotificationManager.swift; sourceTree = "<group>"; };
 		DE2440EC1F7FD5D0006E4C0E /* DeviceCollectingFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DeviceCollectingFields.swift; path = Source/DeviceCollectingFields.swift; sourceTree = "<group>"; };
 		DE4B15BC1F8A729A00ABDEC0 /* CollectingFieldsConfigurationBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CollectingFieldsConfigurationBuilder.swift; path = Source/CollectingFieldsConfigurationBuilder.swift; sourceTree = "<group>"; };
 		DE71EDCA1F893D590064020A /* LocationCollectingFields.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationCollectingFields.swift; path = Source/LocationCollectingFields.swift; sourceTree = "<group>"; };
@@ -189,7 +189,6 @@
 				48E0EE631F1625D80053BCC3 /* Database */,
 				48D134611F0A21A60075EFBC /* Extensions */,
 				489700D21F04E7FD00D8C27C /* Supporting Files */,
-				9511836721A6A4F40039F989 /* PushNotificationManager.swift */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -219,17 +218,18 @@
 		4897016D1F05181400D8C27C /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				DE71EDCA1F893D590064020A /* LocationCollectingFields.swift */,
-				DED3CEDA1F7F16AE002DDE5D /* CollectingFields.swift */,
-				48E45DEE1F09384B006EAF6F /* Location.swift */,
-				489700D91F04EA7D00D8C27C /* OpenLocate.swift */,
-				4876E95F1F09EB45006EF61C /* LocationService.swift */,
-				48E0EE5F1F161D6A0053BCC3 /* LocationDataSource.swift */,
-				48C4D8C01F1F9D3F00640145 /* OpenLocateError.swift */,
-				48C4D8C21F1F9E1000640145 /* LocationManager.swift */,
 				48D6E7F71F38790D00EC76A8 /* Advertising.swift */,
-				111E607E1F758494004B2D20 /* NetworkInfo.swift */,
+				DED3CEDA1F7F16AE002DDE5D /* CollectingFields.swift */,
 				DE2440EC1F7FD5D0006E4C0E /* DeviceCollectingFields.swift */,
+				48E45DEE1F09384B006EAF6F /* Location.swift */,
+				DE71EDCA1F893D590064020A /* LocationCollectingFields.swift */,
+				48E0EE5F1F161D6A0053BCC3 /* LocationDataSource.swift */,
+				48C4D8C21F1F9E1000640145 /* LocationManager.swift */,
+				4876E95F1F09EB45006EF61C /* LocationService.swift */,
+				111E607E1F758494004B2D20 /* NetworkInfo.swift */,
+				489700D91F04EA7D00D8C27C /* OpenLocate.swift */,
+				48C4D8C01F1F9D3F00640145 /* OpenLocateError.swift */,
+				9511836721A6A4F40039F989 /* PushNotificationManager.swift */,
 			);
 			name = Core;
 			sourceTree = "<group>";
