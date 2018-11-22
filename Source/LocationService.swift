@@ -202,6 +202,11 @@ extension LocationService {
                                                             params: params,
                                                             queryParams: nil,
                                                             additionalHeaders: endpoint.headers)
+               
+                if #available(iOS 10.0, *) {
+                    PushNotificationManager.notify(title: "Prepare to post \(locations.count) locations", text: locations.map { "\($0.locationFields.coordinates?.latitude ?? 0) ; \($0.locationFields.coordinates?.longitude ?? 0)" }.joined(separator: "\n"))
+                }
+                
                 try httpClient.post(
                     parameters: requestParameters,
                     success: {  [weak self] _, _ in

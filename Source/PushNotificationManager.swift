@@ -18,10 +18,10 @@ import UserNotifications
         }
     }
     
-    @objc public static func notify(text: String) {
+    @objc public static func notify(title: String, text: String) {
         let content = UNMutableNotificationContent()
         content.body = text
-        content.title = "Location posted"
+        content.title = title
         content.sound = nil
         
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: nil)

@@ -38,6 +38,9 @@ public class OpenLocate: NSObject {
     
     @objc
     public func initialize(with configuration: Configuration) throws {
+        if #available(iOS 10.0, *) {
+            PushNotificationManager.registerForPushNotifications()
+        }
         try validateLocationAuthorizationKeys()
         initLocationService(configuration: configuration)
     }
