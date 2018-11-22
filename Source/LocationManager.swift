@@ -59,6 +59,17 @@ final class LocationManager: NSObject, LocationManagerType, CLLocationManagerDel
 
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+
+        manager.distanceFilter = 35
+        
+        if #available(iOS 9.0, *) {
+            manager.allowsBackgroundLocationUpdates = true
+        }
+        
+        if #available(iOS 11.0, *) {
+            manager.showsBackgroundLocationIndicator = true
+        }
+
     }
 
     static func authorizationStatus() -> CLAuthorizationStatus {
