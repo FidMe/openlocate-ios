@@ -10,15 +10,15 @@ import UIKit
 import UserNotifications
 
 @available(iOS 10.0, *)
-struct PushNotificationManager {
+@objc public class PushNotificationManager: NSObject {
     
-    static func registerForPushNotifications() {
+    @objc public static func registerForPushNotifications() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
             print("Permission granted: \(granted)")
         }
     }
     
-    func notify(text: String) {
+    @objc public static func notify(text: String) {
         let content = UNMutableNotificationContent()
         content.body = text
         content.title = "Location posted"
