@@ -98,11 +98,13 @@ final class LocationManager: NSObject, LocationManagerType, CLLocationManagerDel
         if visit.departureDate != Date.distantFuture {
             date = visit.departureDate
             context = .visitExit
+            if #available(iOS 10.0, *) { PushNotificationManager.notify(title: "locationManager.didVisit", text: "visitExit\n\(visit.coordinate.latitude) ; \(visit.coordinate.longitude)") }
 
             startMonitoringVisitRegion(with: visit.coordinate, maxRadius: visit.horizontalAccuracy)
         } else if visit.arrivalDate != Date.distantPast {
             date = visit.arrivalDate
             context = .visitEntry
+            if #available(iOS 10.0, *) { PushNotificationManager.notify(title: "locationManager.didVisit", text: "visitEntry\n\(visit.coordinate.latitude) ; \(visit.coordinate.longitude)") }
 
             stopMonitoringVisitRegion()
         }
@@ -124,6 +126,7 @@ final class LocationManager: NSObject, LocationManagerType, CLLocationManagerDel
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if #available(iOS 10.0, *) { PushNotificationManager.notify(title: "locationManager.didUpdateLocations", text: "backgroundFetch\n\(locations.map { "\($0.coordinate.latitude) ; \($0.coordinate.longitude)" }.joined(separator: "\n"))") }
         for request in requests {
             request(locations.map({return (location: $0, context: OpenLocateLocation.Context.backgroundFetch)}))
         }
@@ -138,6 +141,7 @@ final class LocationManager: NSObject, LocationManagerType, CLLocationManagerDel
     }
 
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        if #available(iOS 10.0, *) { PushNotificationManager.notify(title: "locationManager.didEnterRegion", text: "geofenceEntry\n\(manager.location?.coordinate.latitude ?? 0) ; \(manager.location?.coordinate.longitude ?? 0)") }
         if let location = manager.location {
             for request in requests {
                 request([(location: location, context: OpenLocateLocation.Context.geofenceEntry)])
@@ -146,6 +150,7 @@ final class LocationManager: NSObject, LocationManagerType, CLLocationManagerDel
     }
 
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        if #available(iOS 10.0, *) { PushNotificationManager.notify(title: "locationManager.didExitRegion", text: "geofenceExit\n\(manager.location?.coordinate.latitude ?? 0) ; \(manager.location?.coordinate.longitude ?? 0)") }
         if let location = manager.location {
             for request in requests {
                 request([(location: location, context: OpenLocateLocation.Context.geofenceExit)])
@@ -158,6 +163,7 @@ final class LocationManager: NSObject, LocationManagerType, CLLocationManagerDel
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         debugPrint(error)
+        if #available(iOS 10.0, *) { PushNotificationManager.notify(title: "locationManager.didFailWithError", text: error.localizedDescription) }
 
         if let fetchLocationCompletionHandler = self.fetchLocationCompletionHandler {
             fetchLocationCompletionHandler(false)
@@ -192,6 +198,7 @@ final class LocationManager: NSObject, LocationManagerType, CLLocationManagerDel
     // MARK: Private
 
     private func startMonitoringVisitRegion(with coordinate: CLLocationCoordinate2D, maxRadius: CLLocationDistance) {
+        if #available(iOS 10.0, *) { PushNotificationManager.notify(title: "LocationManager", text: "startMonitoringVisitRegion\n\(coordinate.latitude) ; \(coordinate.longitude)") }
         if CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) {
             let region = CLCircularRegion(center: coordinate,
                                           radius: max(LocationManager.minimumVisitRegionRadius, maxRadius),
@@ -201,15 +208,18 @@ final class LocationManager: NSObject, LocationManagerType, CLLocationManagerDel
     }
 
     private func stopMonitoringVisitRegion() {
+        if #available(iOS 10.0, *) { PushNotificationManager.notify(title: "LocationManager", text: "stopMonitoringVisitRegion") }
         let regions = manager.monitoredRegions.filter({ $0.identifier == LocationManager.visitRegionIdentifier })
         regions.forEach { manager.stopMonitoring(for: $0) }
     }
 
     private func updateRunningLocationServicesForAuthorizationStatus(_ status: CLAuthorizationStatus) {
         if status == .authorizedAlways && requestAuthorizationStatus == .authorizedAlways && updatingLocation {
+            if #available(iOS 10.0, *) { PushNotificationManager.notify(title: "LocationManager", text: "startMonitoringVisits\nstartMonitoringSignificantLocationChanges") }
             manager.startMonitoringVisits()
             manager.startMonitoringSignificantLocationChanges()
         } else {
+            if #available(iOS 10.0, *) { PushNotificationManager.notify(title: "LocationManager", text: "stopMonitoringVisits\nstopMonitoringSignificantLocationChanges") }
             manager.stopMonitoringVisits()
             manager.stopMonitoringSignificantLocationChanges()
         }

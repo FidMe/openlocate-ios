@@ -67,14 +67,18 @@ public class OpenLocate: NSObject {
     
     @objc
     public func performFetchWithCompletionHandler(_ completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        if #available(iOS 10.0, *) { PushNotificationManager.notify(title: "UIBackgroundFetch", text: "performFetch") }
+
         guard let locationService = self.locationService, locationService.isStarted else {
             completionHandler(.noData)
             return
         }
         locationService.backgroundFetchLocation { (success) in
             if success {
+                if #available(iOS 10.0, *) { PushNotificationManager.notify(title: "UIBackgroundFetch", text: "success") }
                 completionHandler(.newData)
             } else {
+                if #available(iOS 10.0, *) { PushNotificationManager.notify(title: "UIBackgroundFetch", text: "no success") }
                 completionHandler(.noData)
             }
         }
